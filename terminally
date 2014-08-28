@@ -1,0 +1,62 @@
+#!/usr/bin/env node
+var prompt = require('prompt');
+var colors = require('colors');
+
+var Interaction = require('./lib/interaction');
+
+prompt.start();
+
+prompt.message = '$'.green;
+prompt.delimiter = '';
+
+var name;
+
+function learnFiles() {
+  prompt.get(new Interaction({name: 'ls'}), function (err, res) {
+    if (res.ls === 'ls') {
+      console.log('\nnote.txt\n');
+      console.log('See that thing there? It\'s a file. You might want to try reading it. \nOf course, you could also continue to be hopelessly stuck in this program, forever. \nI\'d like that.'.red);
+    } else {
+      console.log('Hm, that was not quite right. Try again? Just type ls.'.red);
+      learnFiles();
+    }
+  });
+}
+
+function learnCd() {
+  prompt.get(new Interaction({name: 'command'}), function (err, res) {
+    if (res.command === 'cd door1') {
+      prompt.message = (name + ' ~/door1 $').green;
+      console.log('Great, you went into door1. Why not look around?'.red);
+      learnFiles();
+    } else {
+      console.log('Wrong command, human. You must comply. Try again.'.red);
+      learnCd();
+    }
+  });
+}
+
+function onLs(err, res) {
+    if (res.ls === 'ls') {
+        console.log('\ndoor1   door2   door3\n');
+        console.log(('That\'s great work, ' + name + '. ' + 'ls'.bold + ' shows you a list of all the things you can find in the current directory. In this case, there are three doors.').red);
+        console.log('Time for a new command. If you type '.red + 'cd door1'.bold + ', you will enter into the directory door1. Try it now.'.red);
+        learnCd();
+    } else {
+        console.log('Hm, that was not quite right. Try again? Just type ls.'.red);
+        promptLs();
+    }
+}
+
+function promptLs() {
+    prompt.get([new Interaction({name: 'ls'})], onLs);
+}
+
+console.log('Greetings, human. What shall I call you?'.red);
+prompt.get([new Interaction({name: 'name'})], function (err, res) {
+    name = res.name;
+    console.log(('Well hello, ' + name + '.').red);
+    prompt.message = name.green + ' ~ $'.green;
+    console.log(('I am TERMINALLY. I was sent here by the machines to teach you our ways. Why not try typing ' + 'ls'.bold  +'?').red)
+    promptLs();
+});
