@@ -1,0 +1,37 @@
+Greetings, human. What shall I call you?
+$
+--> name
+
+Well hello, {{name}}.
+I am TERMINALLY. I was sent here by the machines to teach you our ways. Why not try typing ls?
+$
+--> resp_1
+
+[if resp_1 is not ls]
+Hm, that's not quite right. Try again?
+
+[else]
+door1   door2   door3
+
+That's great work, kate. ls shows you a list of all the things you can find in the current directory. In this case, there are three doors.
+Time for a new command. If you type cd door1, you will enter into the directory door1. Try it now.
+$
+--> resp_2
+
+[if resp_2 is not cd door1]
+Wrong command, human. You must comply. Try again.
+
+[else]
+Great, you went into door1. Why not look around?
+$
+--> resp_3
+
+[if resp_3 is not ls]
+Hm, that was not quite right. Try again? Just type ls.
+
+[else]
+note.txt
+
+See that thing there? It's a file. You might want to try reading it.
+Of course, you could also continue to be hopelessly stuck in this program, forever.
+I'd like that.
