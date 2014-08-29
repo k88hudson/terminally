@@ -13,7 +13,7 @@ Hm, that's not quite right. Try again?
 [else]
 door1   door2   door3
 
-That's great work, kate. ls shows you a list of all the things you can find in the current directory. In this case, there are three doors.
+That's great work, {{name}}. ls shows you a list of all the things you can find in the current directory. In this case, there are three doors.
 Time for a new command. If you type cd door1, you will enter into the directory door1. Try it now.
 $
 --> resp_2
